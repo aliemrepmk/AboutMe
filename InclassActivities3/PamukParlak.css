@@ -1,0 +1,61 @@
+body
+{
+	display: flex;
+	justify-content: center;
+}
+
+.advertisement
+{
+	width:100px;
+	height:150px; 
+	border-color:black;
+	border-width:2px; 
+	background-color:gray; 
+	color:white;
+	
+	position: absolute;
+	top: 10px;
+	left: 10px;
+}
+
+.image img
+{
+	margin-right: 15px;
+	float:left;
+	width: 250px;
+	clear: both;
+}
+
+.pagecontent
+{
+	width: 70%;
+}
+
+.content
+{
+	margin-top: 20px;
+	position: relative;
+	clear: both;
+}
+
+.header
+{
+	min-height: 150px;
+	display: flex;
+	align-items: center;
+}
+
+.logo, title
+{
+	padding: 10px;
+}
+
+.title
+{
+	margin-left: 15px;
+}
+
+.logoimage
+{
+	max-width: 250px;
+}
