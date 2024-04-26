@@ -8,26 +8,32 @@ window.onload = function ()
 	$("display_results").onclick = displayResults;
 	$("display_scores").onclick = displayScores;
 	$("add").onclick = addScore;
-	
-	
-};
+}
 
-function displayResults()
+function displayResults() 
 {
-	var average = 0;
-	for(var i=0;i<scores.length;i++)
-	{
-		average= (average*(i)+scores[i])/(i+1);
-	}
-	
-	document.getElementById("results").innerHTML="<h2> Results </h2><br /> Average score is "+average + "<br \> "
+    var average = 0;
+    var highestScore = -Infinity;
+    var highest_student;
+
+    for (var i = 0; i < scores.length; i++) {
+        average = (average * i + scores[i]) / (i + 1);
+        if (scores[i] > highestScore) {
+            highestScore = scores[i];
+            highest_student=names[i];
+        }
+    }
+
+    document.getElementById("results").innerHTML = "<h2>Results</h2><br/>" +
+        "Average score = " + average.toFixed(2) + "<br/>" +
+        "High score = " + highest_student + " with a score of " + highestScore;
 }
 
 function displayScores() 
 {
     var table = "<tr><th>Name</th><th>Score</th></tr>";
     for (var i = 0; i < names.length; i++) {
-        table += "<tr><td>" + names[i] + "</td><td>" + scores[i] + "</td></tr>";
+        table += "<tr><td>" + names[i] + "</td><td>"+scores[i] + "</td></tr>";
     }
     document.getElementById("scores_table").innerHTML = table;
 }
@@ -35,18 +41,15 @@ function displayScores()
 function addScore() 
 {
     var nameInput = $("name").value;
-    var scoreInput = parseInt($("score").value); // Convert score to integer
-
-    // Check if both name and score are provided
-    if (nameInput && !isNaN(scoreInput)) {
+    var scoreInput = parseInt($("score").value); 
+    if (nameInput.trim() !== "" && !isNaN(scoreInput) && scoreInput >= 0 && scoreInput <= 100) {
         names.push(nameInput);
         scores.push(scoreInput);
         alert("Score added successfully.");
     } else {
-        alert("Please enter both name and score.");
+        alert("You must enter a name and a valid score.");
     }
 
-    // Clear input fields after adding score
     $("name").value = "";
     $("score").value = "";
 }
